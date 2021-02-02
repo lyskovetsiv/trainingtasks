@@ -1,3 +1,5 @@
+package fundamentals;
+
 public class ReverseDisplay {
 
     public static void main(String[] args) {

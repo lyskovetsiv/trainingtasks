@@ -3,7 +3,6 @@ package collectionsoptionaltasks;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class SortLines {
     public static void main(String[] args) throws IOException {

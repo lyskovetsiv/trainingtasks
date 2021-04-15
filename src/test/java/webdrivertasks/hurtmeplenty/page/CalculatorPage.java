@@ -74,6 +74,9 @@ public class CalculatorPage extends BasePage{
     @FindBy(xpath = "//*[contains(text(), 'Commitment term: ')]")
     private WebElement estimatedTerm;
 
+    @FindBy(xpath = "//*[contains(text(), 'Total Estimated')]")
+    private WebElement estimatedPrice;
+
     public CalculatorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
@@ -146,5 +149,9 @@ public class CalculatorPage extends BasePage{
 
     public String getEstimatedCommitmentTerm() {
         return estimatedTerm.getText().replace("Commitment term: ", "");
+    }
+
+    public String getEstimatedPrice() {
+        return estimatedPrice.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
     }
 }

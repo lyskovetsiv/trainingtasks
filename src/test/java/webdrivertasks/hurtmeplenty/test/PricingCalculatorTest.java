@@ -6,6 +6,7 @@ import webdrivertasks.hurtmeplenty.models.Instances;
 
 public class PricingCalculatorTest extends BaseTest {
     private static final String SEARCH_INPUT = "Google Cloud Platform Pricing Calculator";
+    private static final String FINAL_PRICE = "5,413.06";
     Instances instances = new Instances("4", null, "Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS", "Regular",
             "General purpose", "N1", "n1-standard-8 (vCPUs: 8, RAM: 30GB)", "1", "NVIDIA Tesla V100",
             "2x375 GB", "Iowa (us-central1)", "1 Year");
@@ -25,5 +26,6 @@ public class PricingCalculatorTest extends BaseTest {
         Assert.assertTrue(instances.getDatacenterLocation().startsWith(calculatorPage.getEstimatedRegion()));
         Assert.assertTrue(instances.getLocalSSD().startsWith(calculatorPage.getEstimatedLocalSSDspace()));
         Assert.assertEquals(calculatorPage.getEstimatedCommitmentTerm(), instances.getCommittedUsage());
+        Assert.assertEquals(calculatorPage.getEstimatedPrice(), FINAL_PRICE);
     }
 }

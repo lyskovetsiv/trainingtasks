@@ -7,12 +7,14 @@ import org.testng.annotations.BeforeMethod;
 import webdrivertasks.hurtmeplenty.page.CalculatorPage;
 import webdrivertasks.hurtmeplenty.page.MainPage;
 import webdrivertasks.hurtmeplenty.page.SearchResultsPage;
+import webdrivertasks.hurtmeplenty.page.TenMinuteMailPage;
 
 public class BaseTest {
     private WebDriver driver;
     MainPage mainPage;
     SearchResultsPage searchResultsPage;
     CalculatorPage calculatorPage;
+    TenMinuteMailPage tenMinuteMailPage;
 
     @BeforeMethod
     public void setupBrowser() {
@@ -21,6 +23,7 @@ public class BaseTest {
         mainPage = new MainPage(driver);
         searchResultsPage = new SearchResultsPage(driver);
         calculatorPage = new CalculatorPage(driver);
+        tenMinuteMailPage = new TenMinuteMailPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

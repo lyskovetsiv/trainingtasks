@@ -1,6 +1,7 @@
 package webdrivertasks.hurtmeplenty.page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import webdrivertasks.hurtmeplenty.models.Instances;
 import webdrivertasks.hurtmeplenty.utils.PathCreator;
+
+import java.util.ArrayList;
 
 public class CalculatorPage extends BasePage{
     private static final String CALCULATOR_PAGE_URL = "https://cloud.google.com/products/calculator";
@@ -77,6 +80,15 @@ public class CalculatorPage extends BasePage{
     @FindBy(xpath = "//*[contains(text(), 'Total Estimated')]")
     private WebElement estimatedPrice;
 
+    @FindBy(xpath = "//*[contains(text(), 'Email Estimate')]")
+    private WebElement emailEstimateButton;
+
+    @FindBy(xpath = "//md-content//*[@name='description'][@type='email']")
+    private WebElement emailInputBox;
+
+    @FindBy(xpath = "//*[contains(text(), 'Send Email')]")
+    private WebElement sendEmailButton;
+
     public CalculatorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
@@ -129,6 +141,23 @@ public class CalculatorPage extends BasePage{
     public CalculatorPage addToEstimate() {
         addToEstimate.click();
         return this;
+    }
+
+    public CalculatorPage emailEstimateButtonClick() {
+        emailEstimateButton.click();
+        return this;
+    }
+
+    public CalculatorPage setEmail() {
+        driver.switchTo().frame(0).switchTo().frame(0);
+        emailInputBox.click();
+        emailInputBox.sendKeys(Keys.SHIFT, Keys.INSERT);
+        return this;
+    }
+
+    public TenMinuteMailPage sendEmailButtonClick() {
+        sendEmailButton.click();
+        return new TenMinuteMailPage(driver);
     }
 
     public String getEstimatedMachineClass() {

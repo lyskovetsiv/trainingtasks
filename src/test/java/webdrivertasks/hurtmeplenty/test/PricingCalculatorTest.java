@@ -28,4 +28,25 @@ public class PricingCalculatorTest extends BaseTest {
         Assert.assertEquals(calculatorPage.getEstimatedCommitmentTerm(), instances.getCommittedUsage());
         Assert.assertEquals(calculatorPage.getEstimatedPrice(), FINAL_PRICE);
     }
+
+    @Test
+    public void estimatePriceTestWithEmail() throws InterruptedException {
+        mainPage.openPage()
+                .clickSearchButton()
+                .enterSearchInput(SEARCH_INPUT)
+                .openSearchResult(SEARCH_INPUT);
+        calculatorPage.isPageOpened()
+                .configureInstances(instances)
+                .addToEstimate()
+                .emailEstimateButtonClick();
+        tenMinuteMailPage.openPageInNewTab()
+                .getTemporaryUrl()
+                .switchToFirstTab()
+                .setEmail()
+                .sendEmailButtonClick()
+                .switchToTheEmailTab();
+
+        Assert.assertEquals(tenMinuteMailPage.getTotalPrice(), FINAL_PRICE);
+
+    }
 }

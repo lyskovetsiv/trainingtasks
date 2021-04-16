@@ -1,20 +1,18 @@
-D:\JustForPractice
-   (1)GOOOO.docx
-   (2)KKKKAKAK.pptx
+src/main/resources/filedirectory
+   (1)Firstfile
+   (2)newfile.css
+   (3)Secondfile
 
-------BASH
-   (1)JJJJJJJJJ.docx
+------content
 
-------IKARUS
-   (1)DFJSKFJSF.pub
+------innercontent
+   (1)content1
+   (2)content2
 
-------KISS
+------randomizer
+   (1)randomnumber
+   (2)switcher
 
-------GAMING
-   (1)sfdkjhsjkfjk.txt
-
-------STEPSON
-   (1)asfjafs.xlsx
-   (2)lldldl.docx
-
-------MAPPA
+------styles
+   (1)styleforbeginners
+   (2)styleone

@@ -13,7 +13,6 @@ public class ContentSeparator {
     String resultsFilePath = "src/main/resources/contentSeparatorFile.txt";
     FileReader fileReader = new FileReader();
 
-
     {
         try {
             writer = new BufferedWriter(new FileWriter(resultsFilePath));

@@ -62,6 +62,7 @@ public class TenMinuteMailPage extends BasePage {
         return this;
     }
 
+
     public CalculatorPage switchToFirstTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));

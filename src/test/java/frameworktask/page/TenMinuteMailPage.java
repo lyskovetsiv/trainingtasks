@@ -56,7 +56,7 @@ public class TenMinuteMailPage extends BasePage {
     }
 
     public TenMinuteMailPage getTemporaryUrl() {
-        wait.until(ExpectedConditions.visibilityOf(copyUrlButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(copyUrlButton)).click();
         copyUrlButton.click();
         copyUrlButton.click();
         return this;

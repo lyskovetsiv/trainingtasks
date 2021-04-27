@@ -4,6 +4,7 @@ import frameworktask.service.InstancesCreator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import frameworktask.models.Instances;
+import org.testng.asserts.SoftAssert;
 
 public class PricingCalculatorTest extends BaseTest {
     private static final String SEARCH_INPUT = "Google Cloud Platform Pricing Calculator";
@@ -21,11 +22,14 @@ public class PricingCalculatorTest extends BaseTest {
                 .configureInstances(instancesOptions)
                 .addToEstimate();
 
-        Assert.assertEquals(calculatorPage.getEstimatedMachineClass().toLowerCase(), instancesOptions.getMachineClass().toLowerCase(), "Machine class is incorrect");
-        Assert.assertTrue(instancesOptions.getMachineType().startsWith(calculatorPage.getEstimatedInstanceType()), "Machine type is incorrect");
-        Assert.assertTrue(instancesOptions.getDatacenterLocation().startsWith(calculatorPage.getEstimatedRegion()), "Datacenter location is incorrect");
-        Assert.assertTrue(instancesOptions.getLocalSSD().startsWith(calculatorPage.getEstimatedLocalSSDspace()), "Estimated SSD is wrong");
-        Assert.assertEquals(calculatorPage.getEstimatedCommitmentTerm(), instancesOptions.getCommittedUsage(), "Commitment term is incorrect");
-        Assert.assertEquals(calculatorPage.getEstimatedPrice(), FINAL_PRICE, "Final price is incorrect");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(calculatorPage.getEstimatedMachineClass().toLowerCase(), instancesOptions.getMachineClass().toLowerCase(), "Machine class is incorrect");
+        softAssert.assertTrue(instancesOptions.getMachineType().startsWith(calculatorPage.getEstimatedInstanceType()), "Machine type is incorrect");
+        softAssert.assertTrue(instancesOptions.getDatacenterLocation().startsWith(calculatorPage.getEstimatedRegion()), "Datacenter location is incorrect");
+        softAssert.assertTrue(instancesOptions.getLocalSSD().startsWith(calculatorPage.getEstimatedLocalSSDspace()), "Estimated SSD is wrong");
+        softAssert.assertEquals(calculatorPage.getEstimatedCommitmentTerm(), instancesOptions.getCommittedUsage(), "Commitment term is incorrect");
+        softAssert.assertEquals(calculatorPage.getEstimatedPrice(), FINAL_PRICE, "Final price is incorrect");
+
+        softAssert.assertAll();
     }
 }

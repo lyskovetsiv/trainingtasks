@@ -11,14 +11,13 @@ public class PasteCreationTest extends BaseTest {
     private static final String TITLE = "how to gain dominance among developers";
 
     @Test
-    public void pasteCreationTest() throws InterruptedException {
+    public void pasteCreationTest() {
         mainPage.openPage()
                 .setSyntaxHighlighting("Bash")
                 .enterTextInMainForm("Hello from WebDriver")
                 .setExpirationTime("10 Minutes")
                 .enterPasteName("helloweb")
                 .createNewPasteButtonClick();
-        Thread.sleep(10000);
     }
 
     @Test

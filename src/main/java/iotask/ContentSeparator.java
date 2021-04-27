@@ -1,53 +1,64 @@
 package iotask;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 
 public class ContentSeparator {
-    File folder;
-    File[] listOfContent;
-    BufferedWriter writer;
-    String resultsFilePath = "src/main/resources/contentSeparatorFile.txt";
     FileReader fileReader = new FileReader();
+    File resultsFile = new File("src/main/resources/results.txt");
+    BufferedWriter writer;
 
     {
         try {
-            writer = new BufferedWriter(new FileWriter(resultsFilePath));
+            writer = new BufferedWriter(new FileWriter(resultsFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void createDirectoryStructureFile(String folderPath) {
-        folder = new File(folderPath);
-        listOfContent = folder.listFiles();
-        int fileCounter = 1;
-        String indentForDirectories = "------";
-
-        try {
-            writer.newLine();
-
-            for (File entity : listOfContent) {
-                if (entity.isFile()) {
-                    writer.write("   (" + fileCounter + ")" + entity.getName() + "\n");
-                    fileCounter++;
-                }
-            }
-            for (File entity1 : listOfContent) {
-                if (entity1.isDirectory()) {
-                    writer.newLine();
-                    writer.write(indentForDirectories + entity1.getName());
-                    folder = new File(folderPath + "\\" + entity1.getName());
-                    createDirectoryStructureFile(folder.getPath());
-                }
-            }
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public String createDirectoryStructure(String folderPath) {
+        File folder = new File(folderPath);
+        if (!folder.isDirectory()) {
+            throw new IllegalArgumentException("folder is not a Directory");
         }
+        int indent = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        createDirectoryStructureFile(folder, indent, stringBuilder);
+        return stringBuilder.toString();
+    }
+
+    public void createDirectoryStructureFile(File folder, int indent, StringBuilder stringBuilder) {
+        if (!folder.isDirectory()) {
+            throw new IllegalArgumentException("folder is not a Directory");
+        }
+        stringBuilder.append(makeIndent(indent));
+        stringBuilder.append("+--");
+        stringBuilder.append(folder.getName());
+        stringBuilder.append("/");
+        stringBuilder.append("\n");
+        for (File file : folder.listFiles()) {
+            if (file.isDirectory()) {
+                createDirectoryStructureFile(file, indent + 1,  stringBuilder);
+            }
+            else {
+                createFileStructure(file, indent + 1, stringBuilder);
+            }
+        }
+    }
+
+    private void createFileStructure(File file, int indent, StringBuilder stringBuilder) {
+        stringBuilder.append(makeIndent(indent));
+        stringBuilder.append("---");
+        stringBuilder.append(file.getName());
+        stringBuilder.append("\n");
+    }
+
+    private String makeIndent(int indent) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < indent; i++) {
+            stringBuilder.append("| ");
+        }
+        return stringBuilder.toString();
     }
 
     public void showTreeOfAFolder(String folderPath) {
@@ -55,11 +66,12 @@ public class ContentSeparator {
             if (folderPath.equals("src/main/resources/results.txt")) {
                 fileReader.getContentFromFile();
             } else {
-                writer.write(folderPath);
-                createDirectoryStructureFile(folderPath);
+                writer.write(createDirectoryStructure(folderPath));
+                writer.close();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }

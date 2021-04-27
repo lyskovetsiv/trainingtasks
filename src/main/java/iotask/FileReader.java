@@ -1,36 +1,30 @@
 package iotask;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 public class FileReader {
     BufferedReader reader;
     String resultsFilePath = "src/main/resources/results.txt";
 
-    {
+    public void getContentFromFile() {
         try {
-            Files.copy(Paths.get("src/main/resources/contentSeparatorFile.txt"), new File("src/main/resources/results.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
             reader = new BufferedReader(new java.io.FileReader(resultsFilePath));
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
-    public void getContentFromFile() {
         int fileCounter = 0;
-        int directoryCounter = 0;
+        int directoryCounter = -1;
         String line;
         int lineLength = 0;
 
         try {
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("------")) {
+                if (line.endsWith("/")) {
                     directoryCounter++;
                 }
-                else if (line.startsWith("   (")) {
+                else {
                     fileCounter++;
-                    lineLength = lineLength + line.length();
+                    lineLength = lineLength + line.length() - (line.indexOf("---") + 3);
                 }
             }
             System.out.println("Number of directories: " + directoryCounter);

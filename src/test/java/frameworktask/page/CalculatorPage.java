@@ -125,17 +125,17 @@ public class CalculatorPage extends BasePage {
         addGPUCheckbox.click();
         gpuNumberField.click();
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(String.format(DROPDOWN_OPTION, instances.getNumberOfGPUs()))))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(DROPDOWN_OPTION, instances.getNumberOfGPUs())))).click();
         gpuTypeField.click();
         chooseDropdownOption(driver, wait, instances.getGpuType());
         localSSDField.click();
         chooseDropdownOption(driver, wait, instances.getLocalSSD());
         datacenterLocationField.click();
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(String.format(DROPDOWN_OPTION, instances.getDatacenterLocation()))))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(DROPDOWN_OPTION, instances.getDatacenterLocation())))).click();
         committedUsageField.click();
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(String.format(DROPDOWN_OPTION, instances.getCommittedUsage()))))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(DROPDOWN_OPTION, instances.getCommittedUsage())))).click();
         logger.info("Instances configured");
         return this;
     }

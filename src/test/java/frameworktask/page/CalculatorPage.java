@@ -187,8 +187,6 @@ public class CalculatorPage extends BasePage {
     }
 
     public void chooseDropdownOption(WebDriver driver, WebDriverWait wait, String optionName) {
-        WebElement currentElement = driver.findElement(By.xpath(String.format(OPTION_FROM_DROPDOWN, optionName)));
-        wait.until(ExpectedConditions.elementToBeClickable(currentElement));
-        currentElement.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(OPTION_FROM_DROPDOWN, optionName)))).click();
     }
 }

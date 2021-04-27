@@ -1,6 +1,6 @@
 package exceptionstask;
 
-import exceptionstask.universityentities.GradeException;
+import exceptionstask.universityentities.IllegalGradeException;
 import exceptionstask.universityentities.Student;
 import exceptionstask.universityentities.Subject;
 import exceptionstask.universityentities.SubjectException;
@@ -36,7 +36,7 @@ public class StudentsData {
             System.out.println(allStudents.getAverageGradeOfStudent("Ivanov", "Konstantin"));
             System.out.println(allStudents.getAverageSubjectGradeInCertainGroupOnCertainFaculty("JPU", "55", "Chemistry"));
             System.out.println(allStudents.getAverageSubjectGradeInUniversity("Maths"));
-        } catch (GradeException | SubjectException exception) {
+        } catch (IllegalGradeException | SubjectException exception) {
             exception.printStackTrace();
         }
     }

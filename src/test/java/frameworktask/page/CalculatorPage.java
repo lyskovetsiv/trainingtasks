@@ -1,7 +1,6 @@
 package frameworktask.page;
 
 import frameworktask.models.Instances;
-import frameworktask.utils.PathCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,12 +10,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CalculatorPage extends BasePage {
     private static final String CALCULATOR_PAGE_URL = "https://cloud.google.com/products/calculator";
     private static final String DROPDOWN_OPTION = "//*[contains(@class, 'md-select-menu-container md-active md-clickable')]//*[contains(text(), '%s')]";
+    private static final String OPTION_FROM_DROPDOWN = "//*[contains(@class, 'md-select-menu-container')]//*[contains(text(), '%s')]";
     private final Logger logger = LogManager.getRootLogger();
-    PathCreator pathCreator = new PathCreator();
 
     @FindBy(xpath = "//button[contains(text(), 'Send feedback')]")
     private WebElement sendFeedbackButton;
@@ -116,21 +116,21 @@ public class CalculatorPage extends BasePage {
     public CalculatorPage configureInstances(Instances instances) throws InterruptedException {
         numberOfInstancesField.sendKeys(instances.getNumberOfInstances());
         operatingSystemField.click();
-        pathCreator.chooseDropdownOption(driver, wait, instances.getOperatingSystem());
+        chooseDropdownOption(driver, wait, instances.getOperatingSystem());
         machineFamilyField.click();
-        pathCreator.chooseDropdownOption(driver, wait, instances.getMachineFamily());
+        chooseDropdownOption(driver, wait, instances.getMachineFamily());
         seriesField.click();
-        pathCreator.chooseDropdownOption(driver, wait, instances.getSeries());
+        chooseDropdownOption(driver, wait, instances.getSeries());
         machineTypeField.click();
-        pathCreator.chooseDropdownOption(driver, wait, instances.getMachineType());
+        chooseDropdownOption(driver, wait, instances.getMachineType());
         addGPUCheckbox.click();
         gpuNumberField.click();
         Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(String.format(DROPDOWN_OPTION, instances.getNumberOfGPUs()))))).click();
         gpuTypeField.click();
-        pathCreator.chooseDropdownOption(driver, wait, instances.getGpuType());
+        chooseDropdownOption(driver, wait, instances.getGpuType());
         localSSDField.click();
-        pathCreator.chooseDropdownOption(driver, wait, instances.getLocalSSD());
+        chooseDropdownOption(driver, wait, instances.getLocalSSD());
         datacenterLocationField.click();
         Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(String.format(DROPDOWN_OPTION, instances.getDatacenterLocation()))))).click();
@@ -186,5 +186,11 @@ public class CalculatorPage extends BasePage {
 
     public String getEstimatedPrice() {
         return estimatedPrice.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
+    }
+
+    public void chooseDropdownOption(WebDriver driver, WebDriverWait wait, String optionName) {
+        WebElement currentElement = driver.findElement(By.xpath(String.format(OPTION_FROM_DROPDOWN, optionName)));
+        wait.until(ExpectedConditions.elementToBeClickable(currentElement));
+        currentElement.click();
     }
 }

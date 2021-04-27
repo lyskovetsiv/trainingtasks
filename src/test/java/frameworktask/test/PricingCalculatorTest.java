@@ -1,7 +1,6 @@
 package frameworktask.test;
 
 import frameworktask.service.InstancesCreator;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import frameworktask.models.Instances;
 import org.testng.asserts.SoftAssert;

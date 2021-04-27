@@ -24,7 +24,6 @@ public class MainPage extends BasePage {
 
     public MainPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(this.driver, this);
     }
 
     @Override

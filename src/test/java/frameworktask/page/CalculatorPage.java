@@ -92,7 +92,6 @@ public class CalculatorPage extends BasePage {
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(this.driver, this);
     }
 
     @Override

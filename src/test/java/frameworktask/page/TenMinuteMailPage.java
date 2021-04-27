@@ -29,7 +29,6 @@ public class TenMinuteMailPage extends BasePage {
 
     public TenMinuteMailPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(this.driver, this);
     }
 
     @Override

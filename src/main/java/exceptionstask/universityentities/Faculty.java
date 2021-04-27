@@ -1,9 +1,10 @@
 package exceptionstask.universityentities;
 
-public class Faculty {
+public class Faculty extends University {
     private String nameOfFaculty;
 
     public Faculty(String nameOfFaculty) {
+        super();
         this.nameOfFaculty = nameOfFaculty;
     }
 
@@ -19,5 +20,9 @@ public class Faculty {
     public String toString() {
         return "{ Faculty = " + nameOfFaculty + '\'' +
                 " }";
+    }
+
+    public Faculty getFaculty(String facultyName) {
+        return this;
     }
 }

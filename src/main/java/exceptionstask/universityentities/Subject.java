@@ -6,12 +6,12 @@ public class Subject {
     String name;
     int grade;
 
-    public Subject(String name, int grade) throws GradeException{
+    public Subject(String name, int grade) throws IllegalGradeException {
         this.name = name;
         this.grade = grade;
 
         if (grade < 0 || grade > 10) {
-            throw new GradeException("Grade cannot be out of '0-10' range");
+            throw new IllegalGradeException("Grade cannot be out of '0-10' range");
         }
     }
 

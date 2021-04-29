@@ -13,7 +13,7 @@ import org.testng.annotations.Listeners;
 
 @Listeners({TestListener.class})
 public class BaseTest {
-    private WebDriver driver;
+    WebDriver driver;
     MainPage mainPage;
     SearchResultsPage searchResultsPage;
     CalculatorPage calculatorPage;

@@ -186,7 +186,7 @@ public class CalculatorPage extends BasePage {
         return estimatedPrice.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
     }
 
-    public void chooseDropdownOption(WebDriver driver, WebDriverWait wait, String optionName) {
+    private void chooseDropdownOption(WebDriver driver, WebDriverWait wait, String optionName) {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(OPTION_FROM_DROPDOWN, optionName)))).click();
     }
 }

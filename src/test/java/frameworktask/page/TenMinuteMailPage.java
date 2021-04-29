@@ -2,13 +2,10 @@ package frameworktask.page;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.ArrayList;
 
 public class TenMinuteMailPage extends BasePage {
     private static final String MAIL_URL = "https://10minutemail.com/";
@@ -37,35 +34,12 @@ public class TenMinuteMailPage extends BasePage {
         return this;
     }
 
-    public TenMinuteMailPage openPageInNewTab() {
-        ((JavascriptExecutor)driver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        driver.get(MAIL_URL);
-        logger.info("TenMinuteMailPage is opened in a new tab");
-        return this;
-    }
-
-    public TenMinuteMailPage switchToTheEmailTab() {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        logger.info("Switched to TenMinuteEmailTab");
-        return this;
-    }
 
     public TenMinuteMailPage getTemporaryUrl() {
         wait.until(ExpectedConditions.elementToBeClickable(copyUrlButton)).click();
         copyUrlButton.click();
         copyUrlButton.click();
         return this;
-    }
-
-
-    public CalculatorPage switchToFirstTab() {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
-        logger.info("Switched to CalculatorPage tab");
-        return new CalculatorPage(driver);
     }
 
     public String getTotalPrice() {

@@ -2,8 +2,11 @@ package frameworktask.test;
 
 import frameworktask.models.Instances;
 import frameworktask.service.InstancesCreator;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 public class PricingCalculatorWithEmailTest extends BaseTest {
     private static final String SEARCH_INPUT = "Google Cloud Platform Pricing Calculator";
@@ -20,14 +23,21 @@ public class PricingCalculatorWithEmailTest extends BaseTest {
                 .configureInstances(instancesOptions)
                 .addToEstimate()
                 .emailEstimateButtonClick();
-        tenMinuteMailPage.openPageInNewTab()
-                .getTemporaryUrl()
-                .switchToFirstTab()
-                .setEmail()
-                .sendEmailButtonClick()
-                .switchToTheEmailTab();
+
+        ((JavascriptExecutor)driver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+
+        tenMinuteMailPage.openPage()
+                .getTemporaryUrl();
+
+        driver.switchTo().window(tabs.get(0));
+
+                calculatorPage.setEmail()
+                .sendEmailButtonClick();
+
+        driver.switchTo().window(tabs.get(1));
 
         Assert.assertEquals(tenMinuteMailPage.getTotalPrice(), FINAL_PRICE, "Price in Email is incorrect");
-
     }
 }

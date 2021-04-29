@@ -1,14 +1,21 @@
-+--filedirectory/
-| +--content/
-| | +--innercontent/
-| | | ---content1
-| | | ---content2
-| ---Firstfile
-| ---newfile.css
-| +--randomizer/
-| | ---randomnumber
-| | ---switcher
-| ---Secondfile
-| +--styles/
-| | ---styleforbeginners
-| | ---styleone
++--resources/
+| ---contentSeparatorFile.txt
+| +--filedirectory/
+| | +--content/
+| | | +--innercontent/
+| | | | ---content1
+| | | | ---content2
+| | ---Firstfile
+| | ---newfile.css
+| | +--randomizer/
+| | | ---randomnumber
+| | | ---switcher
+| | ---Secondfile
+| | +--styles/
+| | | ---styleforbeginners
+| | | ---styleone
+| +--iotasksfiles/
+| | ---numbers.txt
+| | ---sortedNumbers.txt
+| ---poem
+| ---results.txt

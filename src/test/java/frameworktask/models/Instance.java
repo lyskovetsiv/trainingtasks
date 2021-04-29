@@ -2,7 +2,7 @@ package frameworktask.models;
 
 import java.util.Objects;
 
-public class Instances {
+public class Instance {
     private String numberOfInstances;
     private String whatAreTheseInstancesFor;
     private String operatingSystem;
@@ -16,8 +16,8 @@ public class Instances {
     private String datacenterLocation;
     private String committedUsage;
 
-    public Instances(String numberOfInstances, String whatAreTheseInstancesFor, String operatingSystem, String machineClass, String machineFamily, String series,
-                     String machineType, String numberOfGPUs, String gpuType, String localSSD, String datacenterLocation, String committedUsage) {
+    public Instance(String numberOfInstances, String whatAreTheseInstancesFor, String operatingSystem, String machineClass, String machineFamily, String series,
+                    String machineType, String numberOfGPUs, String gpuType, String localSSD, String datacenterLocation, String committedUsage) {
         this.numberOfInstances = numberOfInstances;
         this.whatAreTheseInstancesFor = whatAreTheseInstancesFor;
         this.operatingSystem = operatingSystem;
@@ -132,20 +132,20 @@ public class Instances {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Instances)) return false;
-        Instances instances = (Instances) o;
-        return Objects.equals(numberOfInstances, instances.numberOfInstances) &&
-                Objects.equals(whatAreTheseInstancesFor, instances.whatAreTheseInstancesFor) &&
-                Objects.equals(operatingSystem, instances.operatingSystem) &&
-                Objects.equals(machineClass, instances.machineClass) &&
-                Objects.equals(machineFamily, instances.machineFamily) &&
-                Objects.equals(series, instances.series) &&
-                Objects.equals(machineType, instances.machineType) &&
-                Objects.equals(numberOfGPUs, instances.numberOfGPUs) &&
-                Objects.equals(gpuType, instances.gpuType) &&
-                Objects.equals(localSSD, instances.localSSD) &&
-                Objects.equals(datacenterLocation, instances.datacenterLocation) &&
-                Objects.equals(committedUsage, instances.committedUsage);
+        if (!(o instanceof Instance)) return false;
+        Instance instance = (Instance) o;
+        return Objects.equals(numberOfInstances, instance.numberOfInstances) &&
+                Objects.equals(whatAreTheseInstancesFor, instance.whatAreTheseInstancesFor) &&
+                Objects.equals(operatingSystem, instance.operatingSystem) &&
+                Objects.equals(machineClass, instance.machineClass) &&
+                Objects.equals(machineFamily, instance.machineFamily) &&
+                Objects.equals(series, instance.series) &&
+                Objects.equals(machineType, instance.machineType) &&
+                Objects.equals(numberOfGPUs, instance.numberOfGPUs) &&
+                Objects.equals(gpuType, instance.gpuType) &&
+                Objects.equals(localSSD, instance.localSSD) &&
+                Objects.equals(datacenterLocation, instance.datacenterLocation) &&
+                Objects.equals(committedUsage, instance.committedUsage);
     }
 
     @Override

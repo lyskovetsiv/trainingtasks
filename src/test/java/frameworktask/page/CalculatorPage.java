@@ -1,6 +1,6 @@
 package frameworktask.page;
 
-import frameworktask.models.Instances;
+import frameworktask.models.Instance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -9,12 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CalculatorPage extends BasePage {
     private static final String CALCULATOR_PAGE_URL = "https://cloud.google.com/products/calculator";
-    private static final String DROPDOWN_OPTION = "//*[contains(@class, 'md-select-menu-container md-active md-clickable')]//*[contains(text(), '%s')]";
-    private static final String OPTION_FROM_DROPDOWN = "//*[contains(@class, 'md-select-menu-container')]//*[contains(text(), '%s')]";
+    private static final String OPTION_FROM_DROPDOWN = "//*[contains(@class, 'md-select-menu-container md-active md-clickable')]//*[contains(text(), '%s')]";
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath = "//button[contains(text(), 'Send feedback')]")
@@ -111,31 +109,28 @@ public class CalculatorPage extends BasePage {
         return this;
     }
 
-    public CalculatorPage configureInstances(Instances instances) throws InterruptedException {
-        numberOfInstancesField.sendKeys(instances.getNumberOfInstances());
+    public CalculatorPage configureInstances(Instance instance){
+        numberOfInstancesField.sendKeys(instance.getNumberOfInstances());
         operatingSystemField.click();
-        chooseDropdownOption(driver, wait, instances.getOperatingSystem());
+        chooseDropdownOption(instance.getOperatingSystem());
         machineFamilyField.click();
-        chooseDropdownOption(driver, wait, instances.getMachineFamily());
+        chooseDropdownOption(instance.getMachineFamily());
         seriesField.click();
-        chooseDropdownOption(driver, wait, instances.getSeries());
+        chooseDropdownOption(instance.getSeries());
         machineTypeField.click();
-        chooseDropdownOption(driver, wait, instances.getMachineType());
+        chooseDropdownOption(instance.getMachineType());
         addGPUCheckbox.click();
         gpuNumberField.click();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(DROPDOWN_OPTION, instances.getNumberOfGPUs())))).click();
+        chooseDropdownOption(instance.getNumberOfGPUs());
         gpuTypeField.click();
-        chooseDropdownOption(driver, wait, instances.getGpuType());
+        chooseDropdownOption(instance.getGpuType());
         localSSDField.click();
-        chooseDropdownOption(driver, wait, instances.getLocalSSD());
+        chooseDropdownOption(instance.getLocalSSD());
         datacenterLocationField.click();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(DROPDOWN_OPTION, instances.getDatacenterLocation())))).click();
+        chooseDropdownOption(instance.getDatacenterLocation());
         committedUsageField.click();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(DROPDOWN_OPTION, instances.getCommittedUsage())))).click();
-        logger.info("Instances configured");
+        chooseDropdownOption(instance.getCommittedUsage());
+        logger.info("Instance configured");
         return this;
     }
 
@@ -186,7 +181,7 @@ public class CalculatorPage extends BasePage {
         return estimatedPrice.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
     }
 
-    private void chooseDropdownOption(WebDriver driver, WebDriverWait wait, String optionName) {
+    private void chooseDropdownOption(String optionName) {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(OPTION_FROM_DROPDOWN, optionName)))).click();
     }
 }

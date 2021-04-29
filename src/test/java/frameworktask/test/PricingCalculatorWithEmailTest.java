@@ -1,6 +1,6 @@
 package frameworktask.test;
 
-import frameworktask.models.Instances;
+import frameworktask.models.Instance;
 import frameworktask.service.InstancesCreator;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -13,14 +13,14 @@ public class PricingCalculatorWithEmailTest extends BaseTest {
     private static final String FINAL_PRICE = "5,413.06";
 
     @Test
-    public void estimatePriceTestWithEmail() throws InterruptedException {
-        Instances instancesOptions = InstancesCreator.withFieldsFromProperty();
+    public void estimatePriceTestWithEmail() {
+        Instance instanceOptions = InstancesCreator.withFieldsFromProperty();
         mainPage.openPage()
                 .clickSearchButton()
                 .enterSearchInput(SEARCH_INPUT)
                 .openSearchResult(SEARCH_INPUT);
         calculatorPage.isPageOpened()
-                .configureInstances(instancesOptions)
+                .configureInstances(instanceOptions)
                 .addToEstimate()
                 .emailEstimateButtonClick();
 

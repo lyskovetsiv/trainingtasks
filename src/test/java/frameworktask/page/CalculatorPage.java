@@ -21,40 +21,40 @@ public class CalculatorPage extends BasePage {
     @FindBy(xpath = "//*[@title='Compute Engine']/ancestor::md-tab-item")
     private WebElement computeEngineSection;
 
-    @FindBy(id = "input_65")
+    @FindBy(id = "input_66")
     private WebElement numberOfInstancesField;
 
-    @FindBy(id = "select_value_label_58")
+    @FindBy(id = "select_value_label_59")
     private WebElement operatingSystemField;
 
-    @FindBy(id = "select_value_label_59")
+    @FindBy(id = "select_value_label_60")
     private WebElement machineClassField;
 
-    @FindBy(id = "select_value_label_60")
+    @FindBy(id = "select_value_label_61")
     private WebElement machineFamilyField;
 
-    @FindBy(id = "select_value_label_61")
+    @FindBy(id = "select_value_label_62")
     private WebElement seriesField;
 
-    @FindBy(id = "select_value_label_62")
+    @FindBy(id = "select_value_label_63")
     private WebElement machineTypeField;
 
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.addGPUs']/descendant::div[contains(text(), 'Add GPUs.')]")
     private WebElement addGPUCheckbox;
 
-    @FindBy(id = "select_value_label_397")
+    @FindBy(id = "select_value_label_398")
     private WebElement gpuNumberField;
 
-    @FindBy(id = "select_value_label_398")
+    @FindBy(id = "select_value_label_399")
     private WebElement gpuTypeField;
 
-    @FindBy(id = "select_value_label_359")
+    @FindBy(id = "select_value_label_360")
     private WebElement localSSDField;
 
-    @FindBy(id = "select_value_label_63")
+    @FindBy(id = "select_value_label_64")
     private WebElement datacenterLocationField;
 
-    @FindBy(id = "select_value_label_64")
+    @FindBy(id = "select_value_label_65")
     private WebElement committedUsageField;
 
     @FindBy(xpath = "//button[@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);']")

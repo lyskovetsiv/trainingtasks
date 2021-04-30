@@ -2,17 +2,17 @@ package exceptionstask.universityentities;
 
 import java.util.Objects;
 
-public class Subject {
+public class Mark {
     String name;
     int grade;
 
-    public Subject(String name, int grade) throws IllegalGradeException {
+    public Mark(String name, int grade) throws IllegalGradeException {
+        if (grade < 0 || grade > 10) {
+            throw new IllegalGradeException();
+        }
+
         this.name = name;
         this.grade = grade;
-
-        if (grade < 0 || grade > 10) {
-            throw new IllegalGradeException("Grade cannot be out of '0-10' range");
-        }
     }
 
     public String getName() {
@@ -34,10 +34,10 @@ public class Subject {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Subject)) return false;
-        Subject subject = (Subject) o;
-        return grade == subject.grade &&
-                Objects.equals(name, subject.name);
+        if (!(o instanceof Mark)) return false;
+        Mark mark = (Mark) o;
+        return grade == mark.grade &&
+                Objects.equals(name, mark.name);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject{" +
+        return "Mark{" +
                 "name='" + name + '\'' +
                 ", grade=" + grade +
                 '}';

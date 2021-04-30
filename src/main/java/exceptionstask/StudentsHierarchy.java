@@ -1,7 +1,7 @@
 package exceptionstask;
 
+import exceptionstask.universityentities.Mark;
 import exceptionstask.universityentities.Student;
-import exceptionstask.universityentities.Subject;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -67,8 +67,8 @@ public class StudentsHierarchy {
 
         for (Student student : allStudentsInUniversity) {
             if (surname.equals(student.getSurname()) && name.equals(student.getName())) {
-                for (Subject subject : student.getSubjects()) {
-                    sumGrades += subject.getGrade();
+                for (Mark mark : student.getSubjects()) {
+                    sumGrades += mark.getGrade();
                     gradeCounter++;
                 }
             }
@@ -82,9 +82,9 @@ public class StudentsHierarchy {
         int averageNumber = -1;
 
         for (Student student : allStudentsInUniversity) {
-            for (Subject subject : student.getSubjects()) {
-                if(subject.getName().equals(subjectName)) {
-                    sumGrades += subject.getGrade();
+            for (Mark mark : student.getSubjects()) {
+                if(mark.getName().equals(subjectName)) {
+                    sumGrades += mark.getGrade();
                     gradeCounter++;
                 }
             }
@@ -106,9 +106,9 @@ public class StudentsHierarchy {
 
         for (Student student : allStudentsInUniversity) {
             if (student.getNameOfFaculty().equals(faculty) && student.getGroupNumber().equals(groupNumber)) {
-                for (Subject subject : student.getSubjects()) {
-                    if (subject.getName().equals(subjectName)) {
-                        sumGrades += subject.getGrade();
+                for (Mark mark : student.getSubjects()) {
+                    if (mark.getName().equals(subjectName)) {
+                        sumGrades += mark.getGrade();
                         gradeCounter++;
                     }
                 }

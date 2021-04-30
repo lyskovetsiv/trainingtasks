@@ -5,7 +5,7 @@ public class IllegalGradeException extends Exception{
     }
 
     public IllegalGradeException(String message) {
-        super(message);
+        super("Grade cannot be out of '0-10' range");
     }
 
     public IllegalGradeException(String message, Throwable cause) {

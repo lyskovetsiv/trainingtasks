@@ -3,27 +3,26 @@ package exceptionstask.universityentities;
 import java.util.Arrays;
 
 public class Student extends Group {
-    String name;
-    String surname;
-    Subject[] subjects;
+    private String name;
+    private String surname;
+    private Mark[] marks;
 
-    public Student(String nameOfFaculty, String groupNumber, String name, String surname, Subject[] subjects) throws SubjectException {
+    public Student(String nameOfFaculty, String groupNumber, String name, String surname, Mark[] marks) throws SubjectException {
         super(nameOfFaculty, groupNumber);
-        this.name = name;
-        this.surname = surname;
-        this.subjects = subjects;
-
-        if (subjects == null || subjects.length == 0) {
+        if (marks == null || marks.length == 0) {
             throw new SubjectException("Student must have at least one subject");
         }
+        this.name = name;
+        this.surname = surname;
+        this.marks = marks;
     }
 
-    public Subject[] getSubjects() {
-        return subjects;
+    public Mark[] getSubjects() {
+        return marks;
     }
 
-    public void setSubjects(Subject[] subjects) {
-        this.subjects = subjects;
+    public void setSubjects(Mark[] marks) {
+        this.marks = marks;
     }
 
     public String getName() {
@@ -47,7 +46,7 @@ public class Student extends Group {
         return "Student{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", subjects=" + Arrays.toString(subjects) +
+                ", marks=" + Arrays.toString(marks) +
                 '}';
     }
 }

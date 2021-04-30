@@ -63,7 +63,7 @@ public class ContentSeparator {
 
     public void showTreeOfAFolder(String folderPath) {
         try {
-            if (folderPath.equals("src/main/resources/results.txt")) {
+            if (folderPath.endsWith(".txt")) {
                 fileReader.getContentFromFile();
             } else {
                 writer.write(createDirectoryStructure(folderPath));

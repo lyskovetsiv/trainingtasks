@@ -1,6 +1,8 @@
 package exceptionstask;
 
 import exceptionstask.universityentities.Mark;
+import exceptionstask.universityentities.NoSpecificSubjectGrade;
+import exceptionstask.universityentities.NoSuchFacultyOrGroupException;
 import exceptionstask.universityentities.Student;
 
 import java.util.LinkedHashSet;
@@ -61,52 +63,48 @@ public class StudentsHierarchy {
         return studentsInGroup;
     }
 
-    public int getAverageGradeOfStudent(String surname, String name) {
+    public double getAverageGradeOfStudent(String surname, String name) {
         int gradeCounter = 0;
         int sumGrades = 0;
 
         for (Student student : allStudentsInUniversity) {
             if (surname.equals(student.getSurname()) && name.equals(student.getName())) {
-                for (Mark mark : student.getSubjects()) {
+                for (Mark mark : student.getMarks()) {
                     sumGrades += mark.getGrade();
                     gradeCounter++;
                 }
             }
         }
-        return sumGrades/gradeCounter;
+        return (double) sumGrades/gradeCounter;
     }
 
-    public int getAverageSubjectGradeInUniversity(String subjectName) {
+    public double getAverageSubjectGradeInUniversity(String subjectName) throws NoSpecificSubjectGrade {
         int gradeCounter = 0;
         int sumGrades = 0;
-        int averageNumber = -1;
 
         for (Student student : allStudentsInUniversity) {
-            for (Mark mark : student.getSubjects()) {
+            for (Mark mark : student.getMarks()) {
                 if(mark.getName().equals(subjectName)) {
                     sumGrades += mark.getGrade();
                     gradeCounter++;
                 }
             }
         }
-        try {
-            averageNumber = sumGrades / gradeCounter;
+        if (gradeCounter == 0) {
+            throw new NoSpecificSubjectGrade();
         }
-        catch (ArithmeticException exception) {
-            System.out.println("No such subject");
-            exception.printStackTrace();
-        }
-        return averageNumber;
+
+        return (double) sumGrades / gradeCounter;
     }
 
-    public int getAverageSubjectGradeInCertainGroupOnCertainFaculty(String faculty, String groupNumber, String subjectName) {
+    public double getAverageSubjectGradeInCertainGroupOnCertainFaculty(String faculty, String groupNumber, String subjectName) throws NoSuchFacultyOrGroupException {
         int gradeCounter = 0;
         int sumGrades = 0;
-        int averageNumber = -1;
+        double averageNumber = -1;
 
         for (Student student : allStudentsInUniversity) {
             if (student.getNameOfFaculty().equals(faculty) && student.getGroupNumber().equals(groupNumber)) {
-                for (Mark mark : student.getSubjects()) {
+                for (Mark mark : student.getMarks()) {
                     if (mark.getName().equals(subjectName)) {
                         sumGrades += mark.getGrade();
                         gradeCounter++;
@@ -114,13 +112,10 @@ public class StudentsHierarchy {
                 }
             }
         }
-        try {
-            averageNumber = sumGrades / gradeCounter;
+        if (gradeCounter == 0) {
+            throw new NoSuchFacultyOrGroupException();
         }
-        catch (ArithmeticException exception) {
-            System.out.println("No such faculty or group");
-            exception.printStackTrace();
-        }
-        return averageNumber;
+
+        return  (double)sumGrades / gradeCounter;
     }
 }

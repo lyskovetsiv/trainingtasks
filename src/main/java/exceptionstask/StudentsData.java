@@ -1,9 +1,6 @@
 package exceptionstask;
 
-import exceptionstask.universityentities.IllegalGradeException;
-import exceptionstask.universityentities.Mark;
-import exceptionstask.universityentities.Student;
-import exceptionstask.universityentities.SubjectException;
+import exceptionstask.universityentities.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +10,7 @@ public class StudentsData {
     public static void main(String[] args) {
         try {
             List<Student> students = Arrays.asList(
-                    new Student("MFF", "33", "Konstantin", "Ivanov", new Mark[]{new Mark("Maths", 8),
+                    new Student("MFF", "33", "Konstantin", "Ivanov", new Mark[]{new Mark("Maths", 9),
                             new Mark("Computer Science", 10)}),
                     new Student("MFF", "33", "Kirill", "Osipov", new Mark[]{new Mark("Maths", 5),
                             new Mark("Physics", 9), new Mark("Chemistry", 7)}),
@@ -36,7 +33,7 @@ public class StudentsData {
             System.out.println(allStudents.getAverageGradeOfStudent("Ivanov", "Konstantin"));
             System.out.println(allStudents.getAverageSubjectGradeInCertainGroupOnCertainFaculty("JPU", "55", "Chemistry"));
             System.out.println(allStudents.getAverageSubjectGradeInUniversity("Maths"));
-        } catch (IllegalGradeException | SubjectException exception) {
+        } catch (IllegalGradeException | SubjectException | NoSpecificSubjectGrade | NoSuchFacultyOrGroupException exception) {
             exception.printStackTrace();
         }
     }

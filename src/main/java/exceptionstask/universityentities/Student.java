@@ -10,14 +10,14 @@ public class Student extends Group {
     public Student(String nameOfFaculty, String groupNumber, String name, String surname, Mark[] marks) throws SubjectException {
         super(nameOfFaculty, groupNumber);
         if (marks == null || marks.length == 0) {
-            throw new SubjectException("Student must have at least one subject");
+            throw new SubjectException();
         }
         this.name = name;
         this.surname = surname;
         this.marks = marks;
     }
 
-    public Mark[] getSubjects() {
+    public Mark[] getMarks() {
         return marks;
     }
 

@@ -1,7 +1,5 @@
 package exceptionstask.universityentities;
 
-import java.util.ArrayList;
-
 public class University {
     private String nameOfUniversity;
 

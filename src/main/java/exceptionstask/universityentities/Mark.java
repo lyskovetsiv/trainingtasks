@@ -3,8 +3,8 @@ package exceptionstask.universityentities;
 import java.util.Objects;
 
 public class Mark {
-    String name;
-    int grade;
+    private String name;
+    private int grade;
 
     public Mark(String name, int grade) throws IllegalGradeException {
         if (grade < 0 || grade > 10) {

@@ -100,7 +100,6 @@ public class StudentsHierarchy {
     public double getAverageSubjectGradeInCertainGroupOnCertainFaculty(String faculty, String groupNumber, String subjectName) throws NoSuchFacultyOrGroupException {
         int gradeCounter = 0;
         int sumGrades = 0;
-        double averageNumber = -1;
 
         for (Student student : allStudentsInUniversity) {
             if (student.getNameOfFaculty().equals(faculty) && student.getGroupNumber().equals(groupNumber)) {

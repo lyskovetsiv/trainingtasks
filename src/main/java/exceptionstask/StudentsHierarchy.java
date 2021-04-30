@@ -1,8 +1,8 @@
 package exceptionstask;
 
 import exceptionstask.universityentities.Mark;
-import exceptionstask.universityentities.NoSpecificSubjectGrade;
-import exceptionstask.universityentities.NoSuchFacultyOrGroupException;
+import exceptionstask.exceptions.NoSpecificSubjectGradeException;
+import exceptionstask.exceptions.NoSuchFacultyOrGroupException;
 import exceptionstask.universityentities.Student;
 
 import java.util.LinkedHashSet;
@@ -78,7 +78,7 @@ public class StudentsHierarchy {
         return (double) sumGrades/gradeCounter;
     }
 
-    public double getAverageSubjectGradeInUniversity(String subjectName) throws NoSpecificSubjectGrade {
+    public double getAverageSubjectGradeInUniversity(String subjectName) throws NoSpecificSubjectGradeException {
         int gradeCounter = 0;
         int sumGrades = 0;
 
@@ -91,7 +91,7 @@ public class StudentsHierarchy {
             }
         }
         if (gradeCounter == 0) {
-            throw new NoSpecificSubjectGrade();
+            throw new NoSpecificSubjectGradeException();
         }
 
         return (double) sumGrades / gradeCounter;

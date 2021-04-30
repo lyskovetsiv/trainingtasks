@@ -1,5 +1,7 @@
 package exceptionstask.universityentities;
 
+import exceptionstask.exceptions.NoSubjectException;
+
 import java.util.Arrays;
 
 public class Student extends Group {
@@ -7,10 +9,10 @@ public class Student extends Group {
     private String surname;
     private Mark[] marks;
 
-    public Student(String nameOfFaculty, String groupNumber, String name, String surname, Mark[] marks) throws SubjectException {
+    public Student(String nameOfFaculty, String groupNumber, String name, String surname, Mark[] marks) throws NoSubjectException {
         super(nameOfFaculty, groupNumber);
         if (marks == null || marks.length == 0) {
-            throw new SubjectException();
+            throw new NoSubjectException();
         }
         this.name = name;
         this.surname = surname;

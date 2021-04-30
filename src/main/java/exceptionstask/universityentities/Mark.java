@@ -1,5 +1,7 @@
 package exceptionstask.universityentities;
 
+import exceptionstask.exceptions.IllegalGradeException;
+
 import java.util.Objects;
 
 public class Mark {

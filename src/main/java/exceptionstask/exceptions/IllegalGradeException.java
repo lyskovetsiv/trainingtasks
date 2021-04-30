@@ -1,4 +1,4 @@
-package exceptionstask.universityentities;
+package exceptionstask.exceptions;
 
 public class IllegalGradeException extends Exception{
     public IllegalGradeException() {

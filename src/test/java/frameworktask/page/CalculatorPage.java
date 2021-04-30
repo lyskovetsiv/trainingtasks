@@ -111,25 +111,16 @@ public class CalculatorPage extends BasePage {
 
     public CalculatorPage configureInstances(Instance instance){
         numberOfInstancesField.sendKeys(instance.getNumberOfInstances());
-        operatingSystemField.click();
-        chooseDropdownOption(instance.getOperatingSystem());
-        machineFamilyField.click();
-        chooseDropdownOption(instance.getMachineFamily());
-        seriesField.click();
-        chooseDropdownOption(instance.getSeries());
-        machineTypeField.click();
-        chooseDropdownOption(instance.getMachineType());
+        chooseOperatingSystemOption(instance.getOperatingSystem());
+        chooseMachineFamilyOption(instance.getMachineFamily());
+        chooseSeriesOption(instance.getSeries());
+        chooseMachineTypeOption(instance.getMachineType());
         addGPUCheckbox.click();
-        gpuNumberField.click();
-        chooseDropdownOption(instance.getNumberOfGPUs());
-        gpuTypeField.click();
-        chooseDropdownOption(instance.getGpuType());
-        localSSDField.click();
-        chooseDropdownOption(instance.getLocalSSD());
-        datacenterLocationField.click();
-        chooseDropdownOption(instance.getDatacenterLocation());
-        committedUsageField.click();
-        chooseDropdownOption(instance.getCommittedUsage());
+        chooseGPUNumberOption(instance.getNumberOfGPUs());
+        chooseGPUType(instance.getGpuType());
+        chooseLocalSSDOption(instance.getLocalSSD());
+        chooseDatacenterLocationOption(instance.getDatacenterLocation());
+        chooseCommittedUsageOption(instance.getCommittedUsage());
         logger.info("Instance configured");
         return this;
     }
@@ -152,9 +143,54 @@ public class CalculatorPage extends BasePage {
         return this;
     }
 
-    public TenMinuteMailPage sendEmailButtonClick() {
+    public void sendEmailButtonClick() {
         sendEmailButton.click();
-        return new TenMinuteMailPage(driver);
+        new TenMinuteMailPage(driver);
+    }
+
+    public void chooseOperatingSystemOption (String option) {
+        operatingSystemField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseMachineFamilyOption (String option) {
+        machineFamilyField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseSeriesOption (String option) {
+        seriesField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseMachineTypeOption (String option) {
+        machineTypeField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseGPUNumberOption (String option) {
+        gpuNumberField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseGPUType (String option) {
+        gpuTypeField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseLocalSSDOption (String option) {
+        localSSDField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseDatacenterLocationOption (String option) {
+        datacenterLocationField.click();
+        chooseDropdownOption(option);
+    }
+
+    public void chooseCommittedUsageOption (String option) {
+        committedUsageField.click();
+        chooseDropdownOption(option);
     }
 
     public String getEstimatedMachineClass() {

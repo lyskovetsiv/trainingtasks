@@ -4,11 +4,10 @@ import java.io.*;
 
 public class FileReader {
     BufferedReader reader;
-    String resultsFilePath = "src/main/resources/results.txt";
 
-    public void getContentFromFile() {
+    public void getContentFromFile(File file) {
         try {
-            reader = new BufferedReader(new java.io.FileReader(resultsFilePath));
+            reader = new BufferedReader(new java.io.FileReader(file));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

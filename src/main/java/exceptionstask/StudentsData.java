@@ -1,9 +1,6 @@
 package exceptionstask;
 
-import exceptionstask.exceptions.IllegalGradeException;
-import exceptionstask.exceptions.NoSpecificSubjectGradeException;
-import exceptionstask.exceptions.NoSubjectException;
-import exceptionstask.exceptions.NoSuchFacultyOrGroupException;
+import exceptionstask.exceptions.*;
 import exceptionstask.universityentities.*;
 
 import java.util.Arrays;
@@ -35,9 +32,9 @@ public class StudentsData {
             System.out.println(allStudents.getAllStudentsInUniversity());
             allStudents.showUniversityHierarchy();
             System.out.println(allStudents.getAverageGradeOfStudent("Ivanov", "Konstantin"));
-            System.out.println(allStudents.getAverageSubjectGradeInCertainGroupOnCertainFaculty("JPU", "55", "Chemistry"));
+            System.out.println(allStudents.getAverageSubjectGradeInCertainGroupAndFaculty("JPU", "55", "Chemistry"));
             System.out.println(allStudents.getAverageSubjectGradeInUniversity("Maths"));
-        } catch (IllegalGradeException | NoSubjectException | NoSpecificSubjectGradeException | NoSuchFacultyOrGroupException exception) {
+        } catch (IllegalGradeException | NoSubjectException | NoSpecificSubjectGradeException | NoSuchFacultyOrGroupException | NoSuchStudentException exception) {
             exception.printStackTrace();
         }
     }

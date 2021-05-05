@@ -12,10 +12,6 @@ public class Group extends Faculty {
         return groupNumber;
     }
 
-    public void setGroupNumber(String groupNumber) {
-        this.groupNumber = groupNumber;
-    }
-
     @Override
     public String toString() {
         return super.toString().replace("}", "Group = " +

@@ -1,5 +1,6 @@
 package exceptionstask;
 
+import exceptionstask.exceptions.NoSuchStudentException;
 import exceptionstask.universityentities.Mark;
 import exceptionstask.exceptions.NoSpecificSubjectGradeException;
 import exceptionstask.exceptions.NoSuchFacultyOrGroupException;
@@ -63,7 +64,7 @@ public class StudentsHierarchy {
         return studentsInGroup;
     }
 
-    public double getAverageGradeOfStudent(String surname, String name) {
+    public double getAverageGradeOfStudent(String surname, String name) throws NoSuchStudentException {
         int gradeCounter = 0;
         int sumGrades = 0;
 
@@ -73,8 +74,13 @@ public class StudentsHierarchy {
                     sumGrades += mark.getGrade();
                     gradeCounter++;
                 }
+                break;
             }
         }
+        if (gradeCounter == 0) {
+            throw new NoSuchStudentException();
+        }
+
         return (double) sumGrades/gradeCounter;
     }
 
@@ -97,7 +103,7 @@ public class StudentsHierarchy {
         return (double) sumGrades / gradeCounter;
     }
 
-    public double getAverageSubjectGradeInCertainGroupOnCertainFaculty(String faculty, String groupNumber, String subjectName) throws NoSuchFacultyOrGroupException {
+    public double getAverageSubjectGradeInCertainGroupAndFaculty(String faculty, String groupNumber, String subjectName) throws NoSuchFacultyOrGroupException {
         int gradeCounter = 0;
         int sumGrades = 0;
 

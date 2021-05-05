@@ -12,10 +12,6 @@ public class Faculty extends University {
         return nameOfFaculty;
     }
 
-    public void setNameOfFaculty(String nameOfFaculty) {
-        this.nameOfFaculty = nameOfFaculty;
-    }
-
     @Override
     public String toString() {
         return "{ Faculty = " + nameOfFaculty + '\'' +

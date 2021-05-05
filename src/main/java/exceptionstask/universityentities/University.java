@@ -14,9 +14,4 @@ public class University {
     public String getNameOfUniversity() {
         return nameOfUniversity;
     }
-
-    public void setNameOfUniversity(String nameOfUniversity) {
-        this.nameOfUniversity = nameOfUniversity;
-    }
-
 }

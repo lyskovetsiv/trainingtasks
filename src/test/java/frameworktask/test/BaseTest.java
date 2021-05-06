@@ -1,10 +1,6 @@
 package frameworktask.test;
 
 import frameworktask.driver.DriverSingleton;
-import frameworktask.page.CalculatorPage;
-import frameworktask.page.MainPage;
-import frameworktask.page.SearchResultsPage;
-import frameworktask.page.TenMinuteMailPage;
 import frameworktask.utils.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;

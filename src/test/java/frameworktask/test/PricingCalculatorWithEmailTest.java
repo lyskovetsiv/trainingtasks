@@ -1,6 +1,9 @@
 package frameworktask.test;
 
 import frameworktask.models.Instance;
+import frameworktask.page.CalculatorPage;
+import frameworktask.page.MainPage;
+import frameworktask.page.TenMinuteMailPage;
 import frameworktask.service.InstancesCreator;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -15,11 +18,11 @@ public class PricingCalculatorWithEmailTest extends BaseTest {
     @Test
     public void estimatePriceTestWithEmail() {
         Instance instanceOptions = InstancesCreator.withFieldsFromProperty();
-        mainPage.openPage()
+        CalculatorPage calculatorPage = new MainPage(driver).openPage()
                 .clickSearchButton()
                 .enterSearchInput(SEARCH_INPUT)
-                .openSearchResult(SEARCH_INPUT);
-        calculatorPage.isPageOpened()
+                .openSearchResult(SEARCH_INPUT)
+                .isPageOpened()
                 .configureInstances(instanceOptions)
                 .addToEstimate()
                 .emailEstimateButtonClick();
@@ -28,12 +31,12 @@ public class PricingCalculatorWithEmailTest extends BaseTest {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        tenMinuteMailPage.openPage()
+        TenMinuteMailPage tenMinuteMailPage = new TenMinuteMailPage(driver).openPage()
                 .getTemporaryUrl();
 
         driver.switchTo().window(tabs.get(0));
 
-                calculatorPage.setEmail()
+        calculatorPage.setEmail()
                 .sendEmailButtonClick();
 
         driver.switchTo().window(tabs.get(1));

@@ -14,18 +14,10 @@ import org.testng.annotations.Listeners;
 @Listeners({TestListener.class})
 public class BaseTest {
     WebDriver driver;
-    MainPage mainPage;
-    SearchResultsPage searchResultsPage;
-    CalculatorPage calculatorPage;
-    TenMinuteMailPage tenMinuteMailPage;
 
     @BeforeMethod
     public void setupBrowser() {
         driver = DriverSingleton.getDriver();
-        mainPage = new MainPage(driver);
-        searchResultsPage = new SearchResultsPage(driver);
-        calculatorPage = new CalculatorPage(driver);
-        tenMinuteMailPage = new TenMinuteMailPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

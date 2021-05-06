@@ -19,9 +19,9 @@ public class SearchResultsPage extends BasePage {
         return this;
     }
 
-    public SearchResultsPage openSearchResult(String searchResult) {
+    public CalculatorPage openSearchResult(String searchResult) {
         driver.findElement(By.xpath(String.format(REQUIRED_SEARCH_RESULT, searchResult))).click();
         logger.info("Opened search result for " + searchResult);
-        return this;
+        return new CalculatorPage(driver);
     }
 }

@@ -1,5 +1,7 @@
 package frameworktask.test;
 
+import frameworktask.page.CalculatorPage;
+import frameworktask.page.MainPage;
 import frameworktask.service.InstancesCreator;
 import org.testng.annotations.Test;
 import frameworktask.models.Instance;
@@ -13,11 +15,11 @@ public class PricingCalculatorTest extends BaseTest {
     public void estimatePriceTest() {
         Instance instanceOptions = InstancesCreator.withFieldsFromProperty();
 
-        mainPage.openPage()
+        CalculatorPage calculatorPage = new MainPage(driver).openPage()
                 .clickSearchButton()
                 .enterSearchInput(SEARCH_INPUT)
-                .openSearchResult(SEARCH_INPUT);
-        calculatorPage.isPageOpened()
+                .openSearchResult(SEARCH_INPUT)
+                .isPageOpened()
                 .configureInstances(instanceOptions)
                 .addToEstimate();
 

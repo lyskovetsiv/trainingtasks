@@ -1,66 +1,34 @@
 package threadstask;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 
-public class Parking {
-    private int parkNumber;
-    private int size;
-    private Semaphore semaphore;
-    private Queue<ParkingPlace> places = new ConcurrentLinkedQueue<>();
+public class Parking{
 
-    public Parking(int parkNumber, int size) {
-        this.parkNumber = parkNumber;
-        this.size = size;
-        this.semaphore = new Semaphore(size, true);
+    private int carLimit;
+    private List<Thread> parkedCars = new ArrayList<>();
+
+    public Parking(int carLimit){
+        this.carLimit = carLimit;
     }
 
-    public int getParkNumber() {
-        return parkNumber;
+    public synchronized boolean park(Car thread) throws InterruptedException{
+        while(carLimit == 0) {
+            wait(thread.getWaitTime());
+            if(carLimit == 0) return false;
+            else break;
+        }
+        carLimit--;
+        parkedCars.add(thread);
+        notifyAll();
+        return true;
     }
 
-    public void setParkNumber(int parkNumber) {
-        this.parkNumber = parkNumber;
-    }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public Queue<ParkingPlace> getPlaces() {
-        Queue<ParkingPlace> parkingPlaces = new LinkedList<>();
-        parkingPlaces.addAll(places);
-        return parkingPlaces;
-    }
-
-    public void addToPlace(ParkingPlace place) {
-        if (size >= 0) {
-            places.add(place);
-            size--;
+    public synchronized void release(Car thread){
+        if(parkedCars.contains(thread)){
+            carLimit++;
+            parkedCars.remove(thread);
         }
     }
 
-    public ParkingPlace takePlace(long wait) {
-        ParkingPlace placeReturn = null;
-        try {
-            if (semaphore.tryAcquire(wait, TimeUnit.MILLISECONDS)) {
-                placeReturn = places.poll();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return placeReturn;
-    }
-
-    public void releasePlace(ParkingPlace place) {
-        places.add(place);
-        semaphore.release();
-    }
 }

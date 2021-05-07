@@ -1,24 +1,33 @@
 package threadstask;
 
-public class AppStarter {
-    public static Parking createParking() {
-        Parking park = new Parking(1, 5);
+import java.util.ArrayList;
+import java.util.List;
 
-        park.addToPlace(new ParkingPlace(1, park.getParkNumber()));
-        park.addToPlace(new ParkingPlace(2, park.getParkNumber()));
-        park.addToPlace(new ParkingPlace(3, park.getParkNumber()));
-        park.addToPlace(new ParkingPlace(4, park.getParkNumber()));
-        park.addToPlace(new ParkingPlace(5, park.getParkNumber()));
-        return park;
+public class AppStarter {
+    public static void main (String[] args){
+        int carCount = 100, parkingSlots = 20;
+        Parking parking = new Parking(parkingSlots);
+        waitCars(createCars(carCount, parking));
+
     }
 
-    public static void main(String[] args) {
-        ParkingPool pool = new ParkingPool();
-        pool.addToPool(createParking());
+    public static List<Thread> createCars(int carCount, Parking parking){
+        List<Thread> carList = new ArrayList<>();
+        for( int carNumber = 0; carNumber < carCount; carNumber++){
+            int waitTime = (int) (Math.random() * 25);
+            int parkedTime = (int) (Math.random() * 50);
+            carList.add(new Car(waitTime, parkedTime, parking));
+        }
+        return carList;
+    }
 
-        for (int i = 0; i < 50; i++) {
-            new Car(pool).start();
+    public static void waitCars(List<Thread> threads){
+        try{
+            for(Thread thread: threads) thread.join();
+        } catch (InterruptedException e){
+            System.out.println(e.getMessage());
         }
     }
+
 }
 

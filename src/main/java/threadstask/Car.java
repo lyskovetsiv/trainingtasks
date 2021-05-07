@@ -1,37 +1,48 @@
 package threadstask;
 
-public class Car extends Thread {
+public class Car extends Thread{
 
-    private boolean isTaken;
-    private ParkingPool pool;
+    private int waitTime;
+    private int parkedTime;
+    private Parking parking;
+    private static int threadCount = 0;
+    private int number = ++threadCount;
 
-    public Car(ParkingPool pool) {
-        this.pool = pool;
+    public int getWaitTime(){ return waitTime;}
+
+    public Car(int waitTime, int parkedTime, Parking parking){
+        this.waitTime= waitTime;
+        this.parkedTime = parkedTime;
+        this.parking = parking;
+        start();
     }
 
-    public void run() {
-        this.setName("Car " + this.getId());
-        ParkingPlace place = null;
 
-        while (place == null) {
-            place = pool.getPlace(500);
-        }
-        System.out.println("Car " + this.getId() + " has taken place " +
-                place.getPlaceNumber() + " on parking " + place.getParkingNumber());
-        isTaken = true;
-
-        place.placeIsTaken();
-        isTaken = false;
-        System.out.println("Car " + this.getId() + " released " +
-                "place " + place.getPlaceNumber() + ". on parking " + place.getParkingNumber());
-        while (true) {
-            if (pool.returnPlace(place)) {
-                break;
+    @Override
+    public void run(){
+        try{
+            boolean isAccepted = parking.park(this);
+            if(isAccepted){
+                wait(parkedTime);
+                parking.release(this);
+            } else{
+                System.out.println("Thread number: " + number + " can't wait more");
             }
+        } catch (InterruptedException e){
+            System.out.println(e.getMessage());
         }
+
     }
 
-    public boolean isTaken() {
-        return isTaken;
+    public void wait(int miliseconds) throws InterruptedException{
+        Thread.sleep(miliseconds);
+    }
+
+    @Override
+    public String toString(){
+        return "Thread number: " + number
+                + " waitTime: " + waitTime
+                + " parkedTime:" + parkedTime
+                + "\n";
     }
 }
